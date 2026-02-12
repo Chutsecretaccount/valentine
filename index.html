@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pour ma petite Manon</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, Helvetica, sans-serif}
+
+::selection {
+    background-color: black;
+    color: #ff849b;
+}
+
+body{
+    height:100vh;
+    background:#fad0c4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+/* INTRO */
+#intro{
+    font-size:1.8rem;
+    max-width:600px;
+    animation:fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* QUESTION */
+#question{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    gap:2rem;
+}
+
+.buttons{
+    position:relative;
+    width:320px;
+    height:120px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:3rem;
+}
+
+button{   
+     background:#ff849b;
+    padding:1rem 2rem;
+    font-size:1.2rem;
+    border:none;
+    border-radius:2rem;
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+#yesBtn{
+    z-index:2;
+}
+
+
+/* MESSAGE FINAL */
+#final{
+    display:none;
+    font-size:1.5rem;
+    animation:fadeIn 1s ease forwards;
+}
+
+/* COEURS */
+.heart{
+    user-select: none;
+    position:fixed;
+    top:-20px;
+    font-size:30px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+    <p>Je t'aime plus que tout, alors...</p>
+    <p>J'ai une demande a te faire...</p>
+</div>
+
+<div id="question">
+    <img src="I Love You Heart GIF.gif" width="300px" height="300px">
+    <h1>Veux-tu bien etre ma Valentine ?</h1>
+    <div class="buttons">
+        <button id="yesBtn">Oui</button>
+    </div>
+</div>
+
+<div id="final">
+    T'avais pas le choix de toute facon<br/>
+    A Samedi soir ma baby...
+</div>
+
+<script>
+const intro = document.getElementById("intro");
+const question = document.getElementById("question");
+const yesBtn = document.getElementById("yesBtn");
+const finalMsg = document.getElementById("final");
+
+// Après 3s, montrer la question
+setTimeout(()=>{
+    intro.style.display="none";
+    question.style.display="flex";
+},3500);
+
+// Quand elle clique OUI
+yesBtn.addEventListener("click",()=>{
+    question.style.display="none";
+    finalMsg.style.display="block";
+    startHearts();
+});
+
+// Pluie de coeurs
+function startHearts(){
+    setInterval(()=>{
+        const heart = document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="💗";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.animationDuration=(Math.random()*2+3)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),5000);
+    },2);
+}
+</script>
+
+</body>
+</html>
